@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{DFF482C0-ACC0-4686-821B-F8D45622BB28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmark", "Benchmark\Benchmark.csproj", "{28B092AD-1496-4A70-BAC5-C4D41F3E54DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElasticBTree", "ElasticBTree\ElasticBTree.csproj", "{4E1FA6BE-113F-4E05-8892-68FDA3F9CCD3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{28B092AD-1496-4A70-BAC5-C4D41F3E54DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28B092AD-1496-4A70-BAC5-C4D41F3E54DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28B092AD-1496-4A70-BAC5-C4D41F3E54DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28B092AD-1496-4A70-BAC5-C4D41F3E54DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E1FA6BE-113F-4E05-8892-68FDA3F9CCD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E1FA6BE-113F-4E05-8892-68FDA3F9CCD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E1FA6BE-113F-4E05-8892-68FDA3F9CCD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E1FA6BE-113F-4E05-8892-68FDA3F9CCD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFF482C0-ACC0-4686-821B-F8D45622BB28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFF482C0-ACC0-4686-821B-F8D45622BB28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFF482C0-ACC0-4686-821B-F8D45622BB28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFF482C0-ACC0-4686-821B-F8D45622BB28}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Benchmark\Benchmark.csproj
+	EndGlobalSection
+EndGlobal
