@@ -32,14 +32,29 @@ namespace ElasticBTree
 		 */
 		internal abstract void Join(K key, Node<K, V> node);
 
+		volatile bool locked;
+
 		internal void Enter ()
 		{
+			/*
 			Monitor.Enter(this);
+			*/
+			// following code works better, depending on scheduling policy
+			// FIXME: use compile flag to switch
+			while (locked) {
+				Thread.Yield();
+			}
+			locked = true;
 		}
 
 		internal void Exit()
 		{
+			/*
 			Monitor.Exit(this);
+			*/
+			// following code works better, depending on scheduling policy
+			// FIXME: use compile flag to switch
+			locked = false;
 		}
 	}
 }
