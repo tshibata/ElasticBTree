@@ -1,5 +1,5 @@
 /*
- * Copyright(c) 2013 tshibata <staatsschreiber@gmail.com>
+ * Copyright(c) 2013-2014 tshibata <staatsschreiber@gmail.com>
  * Licensed under the Apache License, Version 2.0
  */
 using System;
@@ -16,12 +16,12 @@ namespace ElasticBTree
 		{
 		}
 
-		Leaf<K, V> FindLeaf (K key)
+		Leaf<K, V> FindLeaf (K key, bool fix)
 		{
 			Node<K, V> node = ground;
 			try {
 				while (node is Arbitrator<K, V>) {
-					Node<K, V> chosen = ((Arbitrator<K, V>)node).Choose (key);
+					Node<K, V> chosen = ((Arbitrator<K, V>)node).Choose (key, fix);
 					node.Exit ();
 					node = chosen;
 				}
@@ -37,7 +37,7 @@ namespace ElasticBTree
 			lock (this) {
 				ground.Enter ();
 			}
-			Leaf<K, V> leaf = FindLeaf (key);
+			Leaf<K, V> leaf = FindLeaf (key, false);
 			try {
 				V value = leaf.Find (key, fallback);
 				return value;
@@ -51,7 +51,7 @@ namespace ElasticBTree
 			lock (this) {
 				ground.Enter ();
 			}
-			Leaf<K, V> leaf = FindLeaf (key);
+			Leaf<K, V> leaf = FindLeaf (key, true);
 			try {
 				leaf.Insert (key, value);
 			} finally {
@@ -64,7 +64,7 @@ namespace ElasticBTree
 			lock (this) {
 				ground.Enter ();
 			}
-			Leaf<K, V> leaf = FindLeaf (key);
+			Leaf<K, V> leaf = FindLeaf (key, true);
 			try {
 				leaf.Delete (key);
 			} finally {

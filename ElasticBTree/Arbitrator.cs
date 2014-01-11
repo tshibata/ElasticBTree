@@ -1,5 +1,5 @@
 /*
- * Copyright(c) 2013 tshibata <staatsschreiber@gmail.com>
+ * Copyright(c) 2013-2014 tshibata <staatsschreiber@gmail.com>
  * Licensed under the Apache License, Version 2.0
  */
 using System;
@@ -21,16 +21,17 @@ namespace ElasticBTree
 		 */
 		protected abstract int Fix (K key, int index);
 
-		internal Node<K, V> Choose (K key)
+		internal Node<K, V> Choose (K key, bool fix)
 		{
-			//Thread.Sleep(1);
 			int index;
 			for (index = 0; index < keys.Length; index++) {
-				if (key.CompareTo(keys[index]) < 0) {
+				if (key.CompareTo (keys [index]) < 0) {
 					break;
 				}
 			}
-			index = Fix (key, index);
+			if (fix) {
+				index = Fix (key, index);
+			}
 			return children[index];
 		}
 		
