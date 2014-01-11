@@ -1,5 +1,5 @@
 /*
- * Copyright(c) 2013 tshibata <staatsschreiber@gmail.com>
+ * Copyright(c) 2013-2014 tshibata <staatsschreiber@gmail.com>
  * Licensed under the Apache License, Version 2.0
  */
 using System;
@@ -36,24 +36,15 @@ namespace ElasticBTree
 
 		internal void Enter ()
 		{
-			/*
-			Monitor.Enter(this);
-			*/
-			// following code works better, depending on scheduling policy
-			// FIXME: use compile flag to switch
+			// following code is faster than Monitor.Enter(this) if there are enough cores
 			while (locked) {
-				Thread.Yield();
+				Thread.SpinWait (1);
 			}
 			locked = true;
 		}
 
 		internal void Exit()
 		{
-			/*
-			Monitor.Exit(this);
-			*/
-			// following code works better, depending on scheduling policy
-			// FIXME: use compile flag to switch
 			locked = false;
 		}
 	}
