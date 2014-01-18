@@ -10,16 +10,18 @@ namespace ElasticBTree
 	internal abstract class Node<K, V>
 		where K: IComparable
 	{
+		public const int Order = 2;
+
 		/*
 		 * number of keys a node should have at least
 		 */
-		public const int MinKeys = 2;
+		public const int MinKeys = Order;
 
 		/*
 		 * number of keys a node should have at most
 		 */
-		public const int MaxKeys = 4;
-		
+		public const int MaxKeys = Order * 2;
+
 		internal K[] keys;
 
 		/*
@@ -43,7 +45,7 @@ namespace ElasticBTree
 			locked = true;
 		}
 
-		internal void Exit()
+		internal void Exit ()
 		{
 			locked = false;
 		}
