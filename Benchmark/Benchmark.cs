@@ -1,5 +1,5 @@
 /*
- * Copyright(c) 2013 tshibata <staatsschreiber@gmail.com>
+ * Copyright(c) 2013-2014 tshibata <staatsschreiber@gmail.com>
  * Licensed under the Apache License, Version 2.0
  */
 using System;
@@ -26,8 +26,8 @@ namespace Benchmark
 
 		public static void Main (string[] args)
 		{
-			for (int i = 1; i <= 8; i *= 2) {
-				Benchmark benchmark = new Benchmark (10 * 1000 * 1000, i);
+			for (int i = 1; i <= 8; i++) {
+				Benchmark benchmark = new Benchmark (1000 * 1000, i);
 				benchmark.Run ();
 			}
 		}
