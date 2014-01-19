@@ -42,4 +42,7 @@
       <Name>ElasticBTree</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="bench.plt" />
+  </ItemGroup>
 </Project>

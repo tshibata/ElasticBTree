@@ -5,6 +5,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using System.IO;
 
 using ElasticBTree;
 
@@ -13,30 +14,48 @@ namespace Benchmark
 	class Benchmark
 	{
 		int size;
-
+		
 		int parallelism;
-
+		
 		ElasticBTree<int, string> tree = new ElasticBTree<int, string> ();
-
+		
+		double insertTime, findTime, deleteTime, totalTime;
+		
 		Benchmark (int size, int parallelism)
 		{
 			this.size = size;
 			this.parallelism = parallelism;
 		}
-
+		
 		public static void Main (string[] args)
 		{
-			for (int i = 1; i <= 8; i++) {
-				Benchmark benchmark = new Benchmark (1000 * 1000, i);
-				benchmark.Run ();
+			Benchmark[] benchmark = new Benchmark [8];
+			for (int i = 0; i < benchmark.Length; i ++) {
+				benchmark[i] = new Benchmark (1000 * 1000, i + 1);
+				benchmark[i].Run ();
+			}
+			using (StreamWriter w = new StreamWriter(new FileStream("insert.dat", FileMode.Create))) {
+				for (int i = 0; i < benchmark.Length; i ++) {
+					w.WriteLine((i + 1) + " " + benchmark[i].insertTime);
+				}
+			}
+			using (StreamWriter w = new StreamWriter(new FileStream("find.dat", FileMode.Create))) {
+				for (int i = 0; i < benchmark.Length; i ++) {
+					w.WriteLine((i + 1) + " " + benchmark[i].findTime);
+				}
+			}
+			using (StreamWriter w = new StreamWriter(new FileStream("delete.dat", FileMode.Create))) {
+				for (int i = 0; i < benchmark.Length; i ++) {
+					w.WriteLine((i + 1) + " " + benchmark[i].deleteTime);
+				}
 			}
 		}
-
+		
 		static int Pseudorandom (int prev)
 		{
 			return (prev * 1103515245 + 12345) & 0x7FFFFFFF;
 		}
-
+		
 		Task Insert(int divisor, int remainder) {
 			return Task.Factory.StartNew (() => {
 				int r;
@@ -86,46 +105,44 @@ namespace Benchmark
 			Console.WriteLine ("=== " + size + " iteration(s) by " + parallelism + " thread(s) ===");
 			long t0, t1, t2, t3;
 			Task[] tasks = new Task[parallelism];
-
+			
 			t0 = DateTime.Now.Ticks;
-
-			for (int i = 0; i < tasks.Length; i ++)
-			{
-				tasks[i] = Insert(tasks.Length, i);
+			
+			for (int i = 0; i < tasks.Length; i ++) {
+				tasks [i] = Insert (tasks.Length, i);
 			}
-			for (int i = 0; i < tasks.Length; i ++)
-			{
-				tasks[i].Wait();
+			for (int i = 0; i < tasks.Length; i ++) {
+				tasks [i].Wait ();
 			}
-
+			
 			t1 = DateTime.Now.Ticks;
-			Console.WriteLine("insert: " + ((t1 - t0) / 10000000F) + "s");
-
-			for (int i = 0; i < tasks.Length; i ++)
-			{
-				tasks[i] = Find(tasks.Length, i);
+			insertTime = (t1 - t0) * 0.0000001;
+			Console.WriteLine ("insert: " + insertTime + "s");
+			
+			for (int i = 0; i < tasks.Length; i ++) {
+				tasks [i] = Find (tasks.Length, i);
 			}
-			for (int i = 0; i < tasks.Length; i ++)
-			{
-				tasks[i].Wait();
+			for (int i = 0; i < tasks.Length; i ++) {
+				tasks [i].Wait ();
 			}
-
+			
 			t2 = DateTime.Now.Ticks;
-			Console.WriteLine("find: " + ((t2 - t1) / 10000000F) + "s");
-
-			for (int i = 0; i < tasks.Length; i ++)
-			{
-				tasks[i] = Delete(tasks.Length, i);
+			findTime = (t2 - t1) * 0.0000001;
+			Console.WriteLine ("find: " + findTime + "s");
+			
+			for (int i = 0; i < tasks.Length; i ++) {
+				tasks [i] = Delete (tasks.Length, i);
 			}
-			for (int i = 0; i < tasks.Length; i ++)
-			{
-				tasks[i].Wait();
+			for (int i = 0; i < tasks.Length; i ++) {
+				tasks [i].Wait ();
 			}
-
+			
 			t3 = DateTime.Now.Ticks;
-			Console.WriteLine("delete: " + ((t3 - t2) / 10000000F) + "s");
-
-			Console.WriteLine("total: " + ((t3 - t0) / 10000000F) + "s");
+			deleteTime = (t3 - t2) * 0.0000001;
+			Console.WriteLine("delete: " + deleteTime + "s");
+			
+			totalTime = (t3 - t0) * 0.0000001;
+			Console.WriteLine("total: " + totalTime + "s");
 		}
 	}
 }
