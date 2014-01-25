@@ -40,9 +40,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\ElasticBTree\ElasticBTree.csproj">
+    <ProjectReference Include="..\POBTree\POBTree.csproj">
       <Project>{4E1FA6BE-113F-4E05-8892-68FDA3F9CCD3}</Project>
-      <Name>ElasticBTree</Name>
+      <Name>POBTree</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

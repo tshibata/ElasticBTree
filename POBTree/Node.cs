@@ -5,7 +5,7 @@
 using System;
 using System.Threading;
 
-namespace ElasticBTree
+namespace POBTree
 {
 	internal abstract class Node<K, V>
 		where K: IComparable

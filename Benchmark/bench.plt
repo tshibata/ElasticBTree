@@ -1,4 +1,4 @@
-set title "Operation of 1000,000 numbers in a ElasticBTree"
+set title "Operation of 1000,000 numbers in a POBTree"
 
 set terminal svg
 set out "bench.svg"

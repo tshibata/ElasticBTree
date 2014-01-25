@@ -5,7 +5,7 @@
 using System;
 using System.Threading;
 
-namespace ElasticBTree
+namespace POBTree
 {
 	/*
 	 * this class holds a reference to the root node and maintains height of the tree.

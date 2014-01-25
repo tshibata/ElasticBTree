@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
 
-using ElasticBTree;
+using POBTree;
 
 namespace Benchmark
 {
@@ -17,7 +17,7 @@ namespace Benchmark
 		
 		int parallelism;
 		
-		ElasticBTree<int, string> tree = new ElasticBTree<int, string> ();
+		POBTree<int, string> tree = new POBTree<int, string> ();
 		
 		double insertTime, findTime, deleteTime, totalTime;
 		

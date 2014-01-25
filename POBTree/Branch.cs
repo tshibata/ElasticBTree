@@ -5,7 +5,7 @@
 using System;
 using System.Threading;
 
-namespace ElasticBTree
+namespace POBTree
 {
 	internal class Branch<K, V>: Arbitrator<K, V>
 		where K: IComparable

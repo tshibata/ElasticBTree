@@ -5,14 +5,14 @@
 using System;
 using System.Threading;
 
-namespace ElasticBTree
+namespace POBTree
 {
-	public class ElasticBTree<K, V>
+	public class POBTree<K, V>
 		where K: IComparable
 	{
 		Ground<K, V> ground = new Ground<K, V>();
 
-		public ElasticBTree ()
+		public POBTree ()
 		{
 		}
 

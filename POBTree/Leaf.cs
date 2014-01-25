@@ -4,7 +4,7 @@
  */
 using System;
 
-namespace ElasticBTree
+namespace POBTree
 {
 	internal class Leaf<K, V>: Node<K, V>
 		where K: IComparable

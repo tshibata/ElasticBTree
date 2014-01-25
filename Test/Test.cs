@@ -7,7 +7,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using ElasticBTree;
+using POBTree;
 
 namespace Test
 {
@@ -17,19 +17,19 @@ namespace Test
 		[Test()]
 		public void Empty ()
 		{
-			ElasticBTree<int, string> tree = new ElasticBTree<int, string>();
+			POBTree<int, string> tree = new POBTree<int, string>();
 			Assert.AreEqual("x", tree.Find(0, "x"));
 		}
 		
 		[Test()]
 		public void One ()
 		{
-			ElasticBTree<int, string> tree = new ElasticBTree<int, string>();
+			POBTree<int, string> tree = new POBTree<int, string>();
 			tree.Insert(1, "one");
 			Assert.AreEqual("one", tree.Find(1, "x"));
 		}
 		
-		void ArrayTest (ElasticBTree<int, string> tree, int[] a)
+		void ArrayTest (POBTree<int, string> tree, int[] a)
 		{
 			HashSet<int> set = new HashSet<int> ();
 			for (int i = 0; i < a.Length; i++) {
@@ -54,7 +54,7 @@ namespace Test
 		[TestCase(1000)]
 		public void Pseudorandom (int limit)
 		{
-			ElasticBTree<int, string> tree = new ElasticBTree<int, string> ();
+			POBTree<int, string> tree = new POBTree<int, string> ();
 			int[] a = new int[1000];
 			int random;
 			random = 0;
@@ -70,7 +70,7 @@ namespace Test
 		[TestCase(1000)]
 		public void Parallel (int limit)
 		{
-			ElasticBTree<int, string> tree = new ElasticBTree<int, string> ();
+			POBTree<int, string> tree = new POBTree<int, string> ();
 			int[] evenNumbers = new int[500];
 			int[] oddNumbers = new int[500];
 			int random;
